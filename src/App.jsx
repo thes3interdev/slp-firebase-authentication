@@ -2,11 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/ContextAuth';
 import ScrollToTop from './utilities/UtilityScrollToTop';
+import PrivateRoute from './components/RoutePrivate';
 import PageHome from './pages/PageHome';
 import PageSignIn from './pages/PageSignIn';
 import PageSignUp from './pages/PageSignUp';
+import PagePasswordReset from './pages/PagePasswordReset';
 import PageUpdateProfile from './pages/PageUpdateProfile';
-import PrivateRoute from './components/RoutePrivate';
 
 const App = () => {
 	return (
@@ -25,6 +26,7 @@ const App = () => {
 							/>
 							<Route path="/sign-in" element={<PageSignIn />} />
 							<Route path="/sign-up" element={<PageSignUp />} />
+							<Route path="/password-reset" element={<PagePasswordReset />} />
 							<Route path="/update-profile" element={<PageUpdateProfile />} />
 						</Routes>
 					</div>

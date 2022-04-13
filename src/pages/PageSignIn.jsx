@@ -68,7 +68,10 @@ const PageSignIn = () => {
 					</div>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
 						Forgot your password?{'  '}
-						<Link to="#" className="text-sky-700 hover:underline dark:text-sky-500">
+						<Link
+							to="/password-reset"
+							className="text-sky-700 hover:underline dark:text-sky-500"
+						>
 							Reset Password
 						</Link>
 					</div>

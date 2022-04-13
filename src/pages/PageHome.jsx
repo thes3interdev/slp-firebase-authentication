@@ -11,8 +11,9 @@ const PageHome = () => {
 	function handleProfileUpdate() {}
 
 	async function handleSignOut() {
+		setError('');
+
 		try {
-			setError('');
 			await signout();
 			navigate('/sign-in');
 		} catch {
@@ -29,7 +30,7 @@ const PageHome = () => {
 					<p className="uppercase text-2xl font-bold dark:text-white">
 						Firebase Authentication Dashboard
 					</p>
-					{error && <p className="text-red-500 text-sm text-center">{error}</p>}
+					{error && <p className="text-red-500 text-sm">{error}</p>}
 					<p className="mt-2 text-slate-600 dark:text-slate-300">
 						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita
 						dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
