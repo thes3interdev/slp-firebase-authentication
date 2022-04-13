@@ -10,6 +10,6 @@
 	}
 
 	body {
-		@apply font-ubuntu text-slate-700 antialiased;
+		@apply font-ubuntu text-slate-800 antialiased bg-slate-50;
 	}
 }
