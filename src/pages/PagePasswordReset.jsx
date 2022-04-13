@@ -35,8 +35,14 @@ const PagePasswordReset = () => {
 					<h5 className="text-xl font-medium dark:text-white uppercase">
 						Reset Password
 					</h5>
-					{error && <p className="text-red-500 text-sm">{error}</p>}
-					{message && <p className="text-sm">{message}</p>}
+					{error && (
+						<p className="bg-red-300 text-red-800 text-sm rounded p-2">{error}</p>
+					)}
+					{message && (
+						<p className="bg-emerald-300 text-emerald-800 text-sm rounded p-2">
+							{message}
+						</p>
+					)}
 					<div>
 						<label
 							htmlFor="email"

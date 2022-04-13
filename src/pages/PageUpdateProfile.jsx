@@ -6,24 +6,43 @@ import TabTitle from '../utilities/UtilityTabTitle';
 const PageUpdateProfile = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
-	const { signin } = useAuth();
+	const passwordConfirmRef = useRef();
+	const { currentUser, updateemail, updatepassword } = useAuth();
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
-	async function handleSubmit(event) {
+	function handleSubmit(event) {
 		event.preventDefault();
 
-		try {
-			setError('');
-			setLoading(true);
-			await signin(emailRef.current.value, passwordRef.current.value);
-			navigate('/');
-		} catch {
-			setError('Sign in attempt was unsuccessful.');
+		/** validation checks */
+		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+			return setError('The passwords do not match.');
 		}
 
-		setLoading(false);
+		const promises = [];
+
+		setLoading(true);
+		setError('');
+
+		if (emailRef.current.value !== currentUser.email) {
+			promises.push(updateemail(emailRef.current.value));
+		}
+
+		if (passwordRef.current.value) {
+			promises.push(updatepassword(passwordRef.current.value));
+		}
+
+		Promise.all(promises)
+			.then(() => {
+				navigate('/');
+			})
+			.catch(() => {
+				setError('Profile update was not successful.');
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	}
 
 	TabTitle('Update Profile | Firebase Authentication | Superior Software Solutions');
@@ -32,8 +51,12 @@ const PageUpdateProfile = () => {
 		<section>
 			<div className="mx-auto my-16 p-4 max-w-md bg-white rounded-lg border border-slate-200 shadow-md sm:p-6 lg:p-8 dark:bg-slate-800 dark:border-slate-700">
 				<form className="space-y-6" onSubmit={handleSubmit}>
-					<h5 className="text-xl font-medium dark:text-white uppercase">Sign in</h5>
-					{error && <p className="text-red-500 text-sm">{error}</p>}
+					<h5 className="text-xl font-medium dark:text-white uppercase">
+						Update Profile
+					</h5>
+					{error && (
+						<p className="bg-red-300 text-red-800 text-sm rounded p-2">{error}</p>
+					)}
 					<div>
 						<label
 							htmlFor="email"
@@ -47,6 +70,7 @@ const PageUpdateProfile = () => {
 							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
 							placeholder="name@email.com"
 							ref={emailRef}
+							defaultValue={currentUser.email}
 							required
 						/>
 					</div>
@@ -55,40 +79,42 @@ const PageUpdateProfile = () => {
 							htmlFor="password"
 							className="block mb-2 text-sm font-medium dark:text-slate-300"
 						>
-							Your password
+							Password
 						</label>
 						<input
 							type="password"
 							name="password"
-							placeholder="••••••••"
+							placeholder="Leave blank to keep same password"
 							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
 							ref={passwordRef}
-							required
 						/>
 					</div>
-					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
-						Forgot your password?{'  '}
-						<Link
-							to="/password-reset"
-							className="text-sky-700 hover:underline dark:text-sky-500"
+					<div>
+						<label
+							htmlFor="password-confirm"
+							className="block mb-2 text-sm font-medium dark:text-slate-300"
 						>
-							Reset Password
-						</Link>
+							Confirm Password
+						</label>
+						<input
+							type="password"
+							name="password-confirm"
+							placeholder="Leave blank to keep same password"
+							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
+							ref={passwordConfirmRef}
+						/>
 					</div>
 					<button
 						disabled={loading}
 						type="submit"
 						className="uppercase w-full text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
 					>
-						Sign In
+						Update Profile
 					</button>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
-						Not signed up yet?{'  '}
-						<Link
-							to="/sign-up"
-							className="text-sky-700 hover:underline dark:text-sky-500"
-						>
-							Sign Up
+						Terminate update process?{' '}
+						<Link to="/" className="text-sky-700 hover:underline dark:text-sky-500">
+							Cancel
 						</Link>
 					</div>
 				</form>

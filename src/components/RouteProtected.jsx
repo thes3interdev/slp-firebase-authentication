@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/ContextAuth';
 
-const RoutePrivate = ({ children }) => {
+const RouteProtected = ({ children }) => {
 	const { currentUser } = useAuth();
 
 	if (!currentUser) {
@@ -12,4 +12,4 @@ const RoutePrivate = ({ children }) => {
 	return children;
 };
 
-export default RoutePrivate;
+export default RouteProtected;

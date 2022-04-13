@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/ContextAuth';
 import ScrollToTop from './utilities/UtilityScrollToTop';
-import PrivateRoute from './components/RoutePrivate';
+import ProtectedRoute from './components/RouteProtected';
 import PageHome from './pages/PageHome';
 import PageSignIn from './pages/PageSignIn';
 import PageSignUp from './pages/PageSignUp';
@@ -19,15 +19,22 @@ const App = () => {
 							<Route
 								path="/"
 								element={
-									<PrivateRoute>
+									<ProtectedRoute>
 										<PageHome />
-									</PrivateRoute>
+									</ProtectedRoute>
 								}
 							/>
 							<Route path="/sign-in" element={<PageSignIn />} />
 							<Route path="/sign-up" element={<PageSignUp />} />
 							<Route path="/password-reset" element={<PagePasswordReset />} />
-							<Route path="/update-profile" element={<PageUpdateProfile />} />
+							<Route
+								path="/update-profile"
+								element={
+									<ProtectedRoute>
+										<PageUpdateProfile />
+									</ProtectedRoute>
+								}
+							/>
 						</Routes>
 					</div>
 				</ScrollToTop>

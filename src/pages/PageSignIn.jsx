@@ -33,7 +33,9 @@ const PageSignIn = () => {
 			<div className="mx-auto my-16 p-4 max-w-md bg-white rounded-lg border border-slate-200 shadow-md sm:p-6 lg:p-8 dark:bg-slate-800 dark:border-slate-700">
 				<form className="space-y-6" onSubmit={handleSubmit}>
 					<h5 className="text-xl font-medium dark:text-white uppercase">Sign in</h5>
-					{error && <p className="text-red-500 text-sm">{error}</p>}
+					{error && (
+						<p className="bg-red-300 text-red-800 text-sm rounded p-2">{error}</p>
+					)}
 					<div>
 						<label
 							htmlFor="email"
