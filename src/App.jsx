@@ -5,6 +5,8 @@ import ScrollToTop from './utilities/UtilityScrollToTop';
 import PageHome from './pages/PageHome';
 import PageSignIn from './pages/PageSignIn';
 import PageSignUp from './pages/PageSignUp';
+import PageUpdateProfile from './pages/PageUpdateProfile';
+import PrivateRoute from './components/RoutePrivate';
 
 const App = () => {
 	return (
@@ -13,9 +15,17 @@ const App = () => {
 				<ScrollToTop>
 					<div className="flex h-screen flex-col">
 						<Routes>
-							<Route path="/" element={<PageHome />} />
-							<Route path="/signin" element={<PageSignIn />} />
-							<Route path="/signup" element={<PageSignUp />} />
+							<Route
+								path="/"
+								element={
+									<PrivateRoute>
+										<PageHome />
+									</PrivateRoute>
+								}
+							/>
+							<Route path="/sign-in" element={<PageSignIn />} />
+							<Route path="/sign-up" element={<PageSignUp />} />
+							<Route path="/update-profile" element={<PageUpdateProfile />} />
 						</Routes>
 					</div>
 				</ScrollToTop>

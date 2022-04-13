@@ -44,7 +44,7 @@ const PageSignIn = () => {
 						<input
 							type="email"
 							name="email"
-							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
+							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
 							placeholder="name@email.com"
 							ref={emailRef}
 							required
@@ -61,29 +61,29 @@ const PageSignIn = () => {
 							type="password"
 							name="password"
 							placeholder="••••••••"
-							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
+							className="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-slate-600 dark:border-slate-500 dark:placeholder-slate-400 dark:text-white"
 							ref={passwordRef}
 							required
 						/>
 					</div>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
 						Forgot your password?{'  '}
-						<Link to="#" className="text-blue-700 hover:underline dark:text-blue-500">
+						<Link to="#" className="text-sky-700 hover:underline dark:text-sky-500">
 							Reset Password
 						</Link>
 					</div>
 					<button
 						disabled={loading}
 						type="submit"
-						className="uppercase w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="uppercase w-full text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
 					>
 						Sign In
 					</button>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
 						Not signed up yet?{'  '}
 						<Link
-							to="/signup"
-							className="text-blue-700 hover:underline dark:text-blue-500"
+							to="/sign-up"
+							className="text-sky-700 hover:underline dark:text-sky-500"
 						>
 							Sign Up
 						</Link>
