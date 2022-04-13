@@ -6,7 +6,7 @@ const PageSignUp = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
-	const { signUp } = useAuth();
+	const { signup } = useAuth();
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
@@ -15,15 +15,15 @@ const PageSignUp = () => {
 
 		/** validation checks */
 		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-			return setError('Passwords do not match.');
+			return setError('The passwords do not match.');
 		}
 
 		try {
 			setError('');
 			setLoading(true);
-			await signUp(emailRef.current.value, passwordRef.current.value);
+			await signup(emailRef.current.value, passwordRef.current.value);
 		} catch {
-			setError('Account creation failure.');
+			setError('Account creation unsuccessful.');
 		}
 
 		setLoading(false);
@@ -84,9 +84,9 @@ const PageSignUp = () => {
 						/>
 					</div>
 					<button
+						disabled={loading}
 						type="submit"
 						className="uppercase w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-						disabled={loading}
 					>
 						Sign up
 					</button>

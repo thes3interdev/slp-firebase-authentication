@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AuthenticationProvider } from './contexts/ContextAuth';
+import { AuthProvider } from './contexts/ContextAuth';
 import ScrollToTop from './utilities/UtilityScrollToTop';
 import PageHome from './pages/PageHome';
 import PageSignIn from './pages/PageSignIn';
@@ -9,7 +9,7 @@ import PageSignUp from './pages/PageSignUp';
 const App = () => {
 	return (
 		<Router>
-			<AuthenticationProvider>
+			<AuthProvider>
 				<ScrollToTop>
 					<div className="flex h-screen flex-col">
 						<Routes>
@@ -19,7 +19,7 @@ const App = () => {
 						</Routes>
 					</div>
 				</ScrollToTop>
-			</AuthenticationProvider>
+			</AuthProvider>
 		</Router>
 	);
 };
