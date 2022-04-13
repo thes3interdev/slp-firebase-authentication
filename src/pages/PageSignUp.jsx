@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/ContextAuth';
+import TabTitle from '../utilities/UtilityTabTitle';
 
 const PageSignUp = () => {
 	const emailRef = useRef();
@@ -9,6 +10,7 @@ const PageSignUp = () => {
 	const { signup } = useAuth();
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -22,12 +24,15 @@ const PageSignUp = () => {
 			setError('');
 			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value);
+			navigate('/');
 		} catch {
 			setError('Account creation unsuccessful.');
 		}
 
 		setLoading(false);
 	}
+
+	TabTitle('Sign Up | Firebase Authentication | Superior Software Solutions');
 
 	return (
 		<section>
@@ -88,7 +93,7 @@ const PageSignUp = () => {
 						type="submit"
 						className="uppercase w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
-						Sign up
+						Sign Up
 					</button>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
 						Already have an account?{' '}

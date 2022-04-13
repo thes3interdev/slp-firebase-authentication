@@ -1,8 +1,8 @@
 import React from 'react';
-import UtilityTabTitle from '../utilities/UtilityTabTitle';
+import TabTitle from '../utilities/UtilityTabTitle';
 
 const PageHome = () => {
-	UtilityTabTitle('Firebase Authentication | Superior Software Solutions');
+	TabTitle('Home | Firebase Authentication | Superior Software Solutions');
 
 	return (
 		<div>

@@ -1,15 +1,39 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/ContextAuth';
+import TabTitle from '../utilities/UtilityTabTitle';
 
 const PageSignIn = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const { signin } = useAuth();
+	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
+
+	async function handleSubmit(event) {
+		event.preventDefault();
+
+		try {
+			setError('');
+			setLoading(true);
+			await signin(emailRef.current.value, passwordRef.current.value);
+			navigate('/');
+		} catch {
+			setError('Sign in attempt was unsuccessful.');
+		}
+
+		setLoading(false);
+	}
+
+	TabTitle('Sign In | Firebase Authentication | Superior Software Solutions');
 
 	return (
 		<section>
 			<div className="mx-auto my-16 p-4 max-w-md bg-white rounded-lg border border-slate-200 shadow-md sm:p-6 lg:p-8 dark:bg-slate-800 dark:border-slate-700">
-				<form className="space-y-6" action="#">
+				<form className="space-y-6" onSubmit={handleSubmit}>
 					<h5 className="text-xl font-medium dark:text-white uppercase">Sign in</h5>
+					{error && <p className="text-red-500 text-sm">{error}</p>}
 					<div>
 						<label
 							htmlFor="email"
@@ -49,10 +73,11 @@ const PageSignIn = () => {
 						</Link>
 					</div>
 					<button
+						disabled={loading}
 						type="submit"
 						className="uppercase w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
-						Sign Up
+						Sign In
 					</button>
 					<div className="text-sm font-medium text-slate-500 dark:text-slate-300">
 						Not signed up yet?{'  '}
